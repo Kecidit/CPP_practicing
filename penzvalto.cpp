@@ -6,6 +6,7 @@
 #include <string>
 #include <cstring>
 #include <algorithm>
+#include <vector>
 
 using namespace std;
 
@@ -14,52 +15,63 @@ int main()
 
 	string mit = "";
 	string mire = "";
-	double ertek = 0;
-	double veg_osszeg = 0;
+	float ertek = 0;
+	float veg_osszeg = 0;
 
-	cout << "Milyen valutat szeretnel milyenre valtani az alabbiak kozul: USD, HUF, EUR?" << endl;
+	cout << "What currency would you like to change from the following?: USD, HUF, EUR?" << endl;
 	cin >> mit;
 
 	transform(mit.begin(), mit.end(), mit.begin(), toupper);
-
-	if (mit != "USD" && mit != "HUF" && mit != "EUR")
-	{
 	
-		cout << "Rossz erteket adott meg, a program kilep!" << endl;
-		return 0;
+	if (mit != "USD" && mit != "HUF" && mit != "EUR") {
+		do
+		{
 
+			cout << "You've written it wrong, please try again!" << endl;
+			cin >> mit;
+
+			transform(mit.begin(), mit.end(), mit.begin(), toupper);
+
+		} while (mit != "USD" && mit != "HUF" && mit != "EUR");
 	}
-	cout << "Milyen valutara szeretne valtani az alabbiak kozul: USD, HUF, EUR?" << endl;
+	cout << "What currency would you like to change to from the following?: USD, HUF, EUR?" << endl;
 	cin >> mire;
 
 	transform(mire.begin(), mire.end(), mire.begin(), toupper);
 
 	if (mire != "USD" && mire != "HUF" && mire != "EUR")
 	{
+		do {
 
-		cout << "Rossz erteket adott meg, a program kilep!" << endl;
-		return 0;
+			cout << "You've written it wrong, please try again!" << endl;
+			cin >> mire;
 
+			transform(mire.begin(), mire.end(), mire.begin(), toupper);
+
+		} while (mire != "USD" && mire != "HUF" && mire != "EUR");
 	}
-	cout << "Adja meg, hogy mennyi " << mit << "-t akar valtani (pozitiv ertek lehet csak)!" << endl;
+	cout << "Please enter how muchy " << mit << " would you like to change (only 0 or positive numbers):" << endl;
 	cin >> ertek;
-	if (ertek < 0)
+	if (ertek <= 0)
 	{
+		do {
+			cout << "You've written it wrong, please try again!" << endl;
+			cin >> ertek;
 
-		cout << "Rossz erteket adott meg, a program kilep!" << endl;
-		return 0;
-
+		} while (ertek <= 0);
 	}
 
 	if (mit == "USD" && mire == "HUF")
 	{
 		veg_osszeg = ertek * 280;
 
-	} else if (mit == "USD" && mire == "EUR") {
+	} 
+	else if (mit == "USD" && mire == "EUR") {
 		
 		veg_osszeg = ertek * 0.8;
 
-	} else if (mit == "USD" && mire == "USD") {
+	} 
+	else if (mit == "USD" && mire == "USD") {
 
 		veg_osszeg = ertek;
 
@@ -96,7 +108,7 @@ int main()
 	}
 	
 
-	cout << "Vegosszeg: " << veg_osszeg << " " << mire << endl;
+	cout << "Result of the change: " << veg_osszeg << " " << mire << endl;
 
 	 		
 
